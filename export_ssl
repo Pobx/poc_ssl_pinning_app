@@ -1,0 +1,41 @@
+openssl x509 -noout -fingerprint -sha256 -inform pem -in assets/cert/dummyjson.crt
+
+openssl x509 -in assets/cert/dummyjson.crt -text -noout -fingerprint -sha256
+
+
+
+openssl s_client -showcerts -connect dummyjson.com:443 -servername dummyjson.com 2>/dev/null </dev/null |  sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > dummyjson.pem
+
+
+openssl s_client -servername dummyjson.com -connect dummyjson.com:443 < /dev/null 2>/dev/null && openssl x509 -noout -fingerprint -sha256
+
+
+openssl x509 -in assets/cert/dummyjson.cer -text -noout -fingerprint -sha256
+
+/Users/poppy.geidtiphong/workspace/poc_ssl_pinning_app/assets/cert/dummyjson.cer
+
+
+openssl s_client -servername dummyjson.com \
+-connect dummyjson.com:443 < /dev/null 2>/dev/null \
+| openssl x509 -noout -fingerprint -sha256
+
+openssl s_client -servername pinning-test.badssl.com \
+-connect pinning-test.badssl.com:443 < /dev/null 2>/dev/null \
+| openssl x509 -noout -fingerprint -sha256
+
+
+openssl s_client -servername dummyjson.com \
+-connect dummyjson.com:443 < /dev/null 2>/dev/null \
+| openssl x509 -noout -fingerprint -sha256
+
+
+openssl s_client -showcerts -connect dummyjson.com:443 -servername dummyjson.com 2>/dev/null </dev/null | openssl x509 -noout -fingerprint -sha256
+
+
+
+openssl s_client -showcerts -connect dummyjson.com:443 -servername dummyjson.com </dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > assets/cert/certificate.pem
+
+
+
+openssl x509 -in assets/cert/public.pem -text -noout -fingerprint -sha256
+
